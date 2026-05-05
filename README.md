@@ -77,7 +77,9 @@ python trainer.py --task mortality --variant full --epochs 1 --dev --no_wandb
 
 ### Drug recommendation
 
-![HCATDrugRec architecture](assets/drug_rec_architecture.png)
+<p align="center">
+  <img src="assets/drug_rec_architecture.png" alt="HCATDrugRec architecture" width="500"/>
+</p>
 
 | Variant   | Model             | Notes                                            |
 |-----------|-------------------|--------------------------------------------------|
@@ -88,7 +90,9 @@ python trainer.py --task mortality --variant full --epochs 1 --dev --no_wandb
 
 ### Mortality / Readmission
 
-![HCATBinary architecture](assets/mortality_readmission_architecture.png)
+<p align="center">
+  <img src="assets/mortality_readmission_architecture.png" alt="HCATBinary architecture" width="500"/>
+</p>
 
 | Variant    | Model         | Notes                                          |
 |------------|---------------|------------------------------------------------|
