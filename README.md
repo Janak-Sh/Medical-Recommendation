@@ -76,6 +76,9 @@ python trainer.py --task mortality --variant full --epochs 1 --dev --no_wandb
 ## Variants
 
 ### Drug recommendation
+
+![HCATDrugRec architecture](assets/drug_rec_architecture.png)
+
 | Variant   | Model             | Notes                                            |
 |-----------|-------------------|--------------------------------------------------|
 | `baseline`| PyHealth `Transformer` | Vanilla baseline + BCE                      |
@@ -84,6 +87,9 @@ python trainer.py --task mortality --variant full --epochs 1 --dev --no_wandb
 | `ABC`     | `HCATDrugRec`     | AB + copy stream + evidence stream (full model)  |
 
 ### Mortality / Readmission
+
+![HCATBinary architecture](assets/mortality_readmission_architecture.png)
+
 | Variant    | Model         | Notes                                          |
 |------------|---------------|------------------------------------------------|
 | `baseline` | PyHealth `RNN`| Vanilla baseline                               |
