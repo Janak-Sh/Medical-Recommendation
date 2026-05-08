@@ -35,6 +35,7 @@ from typing import Tuple
 
 import numpy as np
 import torch
+import time
 
 try:
     import wandb
@@ -143,6 +144,8 @@ class WandBHandler(logging.Handler):
         self._buffer = {}
         self._train_loss = None
         self._trajectory = []
+        self._epoch_start = time.time()
+        self._train_start = time.time()
 
         try:
             self.run.define_metric("epoch")
@@ -171,10 +174,13 @@ class WandBHandler(logging.Handler):
         if self._mode == "train":
             self._train_loss = self._buffer.get("loss")
         elif self._mode == "eval":
+            epoch_time = time.time() - self._epoch_start
             log_dict = {f"val/{k}": v for k, v in self._buffer.items()}
             if self._train_loss is not None:
                 log_dict["train/loss"] = self._train_loss
             log_dict["epoch"] = self._epoch
+            log_dict["epoch_time_seconds"] = epoch_time
+            self._epoch_start = time.time()
             try:
                 self.run.log(log_dict)
             except Exception:
@@ -188,6 +194,11 @@ class WandBHandler(logging.Handler):
 
     def close_and_save_csv(self):
         self._flush_block()
+        total_time = time.time() - self._train_start
+        try:
+            self.run.summary["total_training_seconds"] = total_time  # add this
+        except Exception:
+            pass
         if not self._trajectory:
             return
         all_keys = sorted({k for r in self._trajectory for k in r.keys()})
