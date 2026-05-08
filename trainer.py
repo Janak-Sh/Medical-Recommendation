@@ -196,7 +196,7 @@ class WandBHandler(logging.Handler):
         self._flush_block()
         total_time = time.time() - self._train_start
         try:
-            self.run.summary["total_training_seconds"] = total_time  # add this
+            self.run.summary["total_training_seconds"] = total_time
         except Exception:
             pass
         if not self._trajectory:
